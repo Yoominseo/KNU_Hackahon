@@ -1,7 +1,8 @@
 package dgsw.hs.kr.knu_hackathon;
 
-import android.support.v4.app.FragmentActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -37,10 +38,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        Intent intent = getIntent();
+        double [] latlon = intent.getDoubleArrayExtra("latlon");
+        LatLng myplace;
+        for(int i = 0 ; i < latlon.length; i+=2){
+            myplace = new LatLng(latlon[i],latlon[i+1]);
+            mMap.addMarker(new MarkerOptions().position(myplace).title("Marker in Sydney"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(myplace));
+        }
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 }

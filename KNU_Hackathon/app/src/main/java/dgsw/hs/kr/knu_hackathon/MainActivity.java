@@ -18,6 +18,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent( getApplicationContext() , MapsActivity.class);
+
+                double [] LatLon = {37.540705, 126.956764,
+                                    -34,151};
+
+                intent.putExtra("latlon",LatLon);
                 startActivity(intent);
             }
         });
